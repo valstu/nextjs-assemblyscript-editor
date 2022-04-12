@@ -6,10 +6,7 @@ import type { editor } from "monaco-editor";
 
 const Home: NextPage = () => {
   const [compiled, setCompiled] = useState<string | null | undefined>();
-  const ascRef =
-    useRef<
-      typeof import("/Users/valtterikaresto/Desktop/nvf-projects/equilibrium/xrpl/next-with-asc/node_modules/assemblyscript/dist/asc")
-    >();
+  const ascRef = useRef<typeof import("assemblyscript/dist/asc")>();
   const editorRef = useRef<editor.IStandaloneCodeEditor>();
   const compile = async (SOURCE?: string) => {
     if (!SOURCE) {
