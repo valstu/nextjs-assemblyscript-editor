@@ -1,3 +1,5 @@
+Quick test with Next.js, Monaco Editor and AssemblyScript SDK that you can build editor/compiler that works fully on client side.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
