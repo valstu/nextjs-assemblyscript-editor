@@ -12,9 +12,11 @@ const Home: NextPage = () => {
     if (!SOURCE) {
       return;
     }
-    const value = await ascRef.current?.compileString(SOURCE);
-    console.log("ss", SOURCE, value);
-    setCompiled(value?.text);
+    const value = await ascRef.current?.compileString(SOURCE, {
+      optimizeLevel: 3,
+      runtime: "stub",
+    });
+    setCompiled(value?.text || value?.error?.message);
   };
   useEffect(() => {
     const ok = async () => {
@@ -40,7 +42,15 @@ const Home: NextPage = () => {
           <Editor
             width={"50%"}
             height={400}
+            language="typescript"
             defaultValue="export function test(): void {}"
+            beforeMount={(monaco) => {
+              if (ascRef.current)
+                monaco.languages.typescript.typescriptDefaults.addExtraLib(
+                  ascRef.current?.definitionFiles.assembly,
+                  "assemblyscript/std/assembly/index.d.ts"
+                );
+            }}
             onMount={(editor) => {
               if (!editorRef.current) {
                 editorRef.current = editor;
